@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2021",
+    "baseUrl": "src"
+  },
+  "include": ["./node_modules/cypress", "cypress/**/*.js", "src"]
+}
