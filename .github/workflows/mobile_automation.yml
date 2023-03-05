@@ -1,0 +1,74 @@
+name: Run Mobile Automation
+
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: "Environments: dev / localhost"
+        required: true
+        options:
+          - dev
+          - localhost
+        default: "dev"
+      device:
+        type: choice
+        description: "Devices: Samsung S20 / iPhone 14 Pro"
+        required: true
+        options:
+          - android
+          - ios
+        default: "android"
+      test-type:
+        type: choice
+        description: "Test types: smoke / regression"
+        required: true
+        options:
+          - smoke
+          - regression
+        default: "smoke"
+
+jobs:
+  run-tests:
+    name: Build packages & run tests
+    runs-on: ubuntu-latest
+    env:
+      DEFAULT_DEVICE: android
+      DEFAULT_TYPE: smoke
+      LAMBDATEST_USER: ${{ secrets.LAMBDATEST_USER }}
+      LAMBDATEST_KEY: ${{ secrets.LAMBDATEST_KEY }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ">=16.0.0"
+
+      - name: Install all packages
+        if: always()
+        run: npm install
+
+      - name: Install LambdaTest service package
+        if: always()
+        run: npm i wdio-lambdatest-service --force
+
+      - name: Running Sample application on localhost
+        if: ${{ github.event.inputs.environment == 'localhost' || github.event_name == 'pull_request' }}
+        run: |
+          npm run start &
+
+      - name: LambdaTest - running smoke tests for Pull Request
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          export TEST_TYPE=${{ env.DEFAULT_TYPE }}
+          npm run lt:mobile github-action-workflows-appium/mobile-appium-automation/config/wdio.lt.${{ env.DEFAULT_DEVICE }}.localhost.conf.js --cucumberOpts.tagExpression \"@${{ env.DEFAULT_TYPE }}\"
+
+      - name: LambdaTest - run "${{ github.event.inputs.test-type }}" tests, on "${{ github.event.inputs.environment }}" env, on "${{ github.event.inputs.device }}" device
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          export TEST_TYPE=${{ github.event.inputs.test-type }}
+          npm run lt:mobile github-action-workflows-appium/mobile-appium-automation/config/wdio.lt.${{ github.event.inputs.device }}.${{ github.event.inputs.environment }}.conf.js --cucumberOpts.tagExpression \"@${{ github.event.inputs.test-type }}\"

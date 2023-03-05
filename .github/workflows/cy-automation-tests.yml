@@ -1,0 +1,44 @@
+name: Run Automation Tests
+
+on:
+  schedule:
+    - cron: "0 8 * * *" # run on schedule, examples: https://crontab.guru/examples.html
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: "Environment: localhost / dev"
+        required: true
+        options:
+          - localhost
+          - dev
+        default: "localhost"
+
+jobs:
+  list-specs:
+    name: Files
+    uses: "./.github/workflows/cy-list-of-specs.yml"
+
+  build-packages:
+    name: Build
+    uses: "./.github/workflows/cy-build-packages.yml"
+
+  run-specs:
+    name: Run
+    needs: [list-specs, build-packages]
+    if: always()
+    uses: "./.github/workflows/cy-run-specs.yml"
+    with:
+      specs: ${{ needs.list-specs.outputs.specs }}
+
+  report:
+    name: Report
+    needs: run-specs
+    if: always()
+    uses: "./.github/workflows/cy-slack-reporting.yml"
+    secrets:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+    with:
+      tests-result: ${{ needs.run-specs.result }}
+      environment: ${{ inputs.environment }}
