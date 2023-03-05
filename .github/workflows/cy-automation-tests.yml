@@ -1,4 +1,4 @@
-name: Run Automation Tests
+name: Run WEB Automation
 
 on:
   schedule:
