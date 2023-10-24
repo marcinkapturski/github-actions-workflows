@@ -29,7 +29,7 @@ Section `on` explains the events the workflow is waiting for:
 - on `schedule` scheduled runs at defined times (based on cron rules, examples: https://crontab.guru/examples.html)
 - on `pull_request` triggered when a new pull_request is created.
 - triggered manually through workflow_dispatch (a screenshot is presented below in the
-- on demand `workflow_dispatch`, by manuall trigering ( a screenshot is presented below in the ![`How to run`](https://github.com/marcinkapturski/github-actions-workflows#3-how-to-run))
+- on demand `workflow_dispatch`, by manual triggering ( a screenshot is presented below in the ![`How to run`](https://github.com/marcinkapturski/github-actions-workflows#3-how-to-run))
   <br />`workflow_dispatch` also allows passing additional values, such as the environment.
 
 ```bash
@@ -72,9 +72,6 @@ jobs:
 ```
 
 ### `cy-build-packages.yml`
-
-Depending on the event `github.event.inputs.environment == 'localhost' ` `github.event_name == 'pull_request'`
-<br />Steps will build project packages, the app for testing and save build folder with the app itself
 
 The steps will build project packages and the app for testing and then save the build folder with the app itself based on specific event conditions, namely, when `github.event.inputs.environment` is set to 'localhost' and 'pull_request'.
 
@@ -151,7 +148,7 @@ At the end it will create artifacts with screenshots and videos from the test ru
 
 ### `cy-slack-reporting.yml`
 
-First will gader all informations about test run like: status of the run, event name, environment, branch name
+First will gather all informations about test run like: status of the run, event name, environment, branch name
 <br /> Then will run node script: `/slack/success_message.js` or `/slack/failed_message.js`
 
 <!-- ## Description of the parallel tests run (strategy -> matrix) -->
