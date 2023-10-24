@@ -1,5 +1,9 @@
 # Proof of Concept: GitHub workflow for running Cypress automation
 
+
+![github-actions-workflow](https://github.com/marcinkapturski/github-actions-workflows/assets/41780000/a843775d-d855-441f-a9f1-bad2d8806e5b)
+
+
 ## POC includes:
 
 - triggering workflow by different events (on schedule, on demand, on pull_request)
