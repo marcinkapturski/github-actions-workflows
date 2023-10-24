@@ -16,7 +16,7 @@ Initiating workflows through various events (on schedule, on demand, on pull_req
 
 ### `cy-automation-tests.yml`
 
-This file is only defining on which even workflow will be run it and with which steps
+This file is only defining on which event workflow will be run it and with which steps
 <br />Main workflow is decomposed into "shared workflows"
 <br />"shared workflows" are responsible for specific jobs like building, running, reporting
 
