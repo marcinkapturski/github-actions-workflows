@@ -9,7 +9,7 @@ on:
 
 jobs:
   list-of-specs:
-    name: List of Feature files
+    name: feature files to run
     runs-on: ubuntu-latest
     outputs:
       specs: ${{ steps.list.outputs.list }}
@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: ">=16.0.0"
 
-      - name: Run node script
+      - name: Get list of feature files
         id: list
         if: always()
         run: |

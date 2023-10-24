@@ -17,7 +17,7 @@ on:
 
 jobs:
   report:
-    name: Report results on Slack
+    name: report results on Slack
     runs-on: ubuntu-latest
     if: always()
     steps:
@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: ">=16.0.0"
 
-      - name: install dependency
+      - name: Install dependency
         if: always()
         run: |
           yarn add isomorphic-fetch
