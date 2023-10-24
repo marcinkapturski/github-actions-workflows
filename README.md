@@ -24,7 +24,7 @@ Section `on` describes what events the workflow is waiting for
 
 - on `schedule` run on defined time (base on cron rules examples: https://crontab.guru/examples.html)
 - on `pull_request` run when new pull_request is created
-- on demand `workflow_dispatch`, by manuall trigering ( screenshot presented below in section ![`How to run`](https://github.com/marcinkapturski/github-actions-workflows/edit/master/README.md#how-to-run))
+- on demand `workflow_dispatch`, by manuall trigering ( screenshot presented below in section ![`How to run`](https://github.com/marcinkapturski/github-actions-workflows#3-how-to-run))
   <br />`workflow_dispatch` allows also pass values like `environment`
 
 ```bash
