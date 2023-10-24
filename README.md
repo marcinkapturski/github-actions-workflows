@@ -6,11 +6,11 @@
 
 ## 1. POC includes:
 
-- triggering workflow by different events (on schedule, on demand, on pull_request)
-- building packages and sample React app
-- running the app locally ( serve -s /build )
-- running Cypress tests as a parallel run
-- report results on Slack with custom messages
+Initiating workflows through various events (on schedule, on demand, on pull_request).
+- Building packages and a sample React application.
+- Running the application locally (via serve -s /build).
+- Executing Cypress tests in parallel.
+- Reporting results on Slack with custom messages.
 
 ## 2. Details of the individual files
 
@@ -20,12 +20,17 @@ This file is only defining on which even workflow will be run it and with which 
 <br />Main workflow is decomposed into "shared workflows"
 <br />"shared workflows" are responsible for specific jobs like building, running, reporting
 
-Section `on` describes what events the workflow is waiting for
+This file defines the conditions under which the workflow will run and the steps it will take. 
+<br />The main workflow is broken down into "shared workflows" 
+<br />responsible for specific tasks such as building, running, and reporting.
 
-- on `schedule` run on defined time (base on cron rules examples: https://crontab.guru/examples.html)
-- on `pull_request` run when new pull_request is created
-- on demand `workflow_dispatch`, by manuall trigering ( screenshot presented below in section ![`How to run`](https://github.com/marcinkapturski/github-actions-workflows#3-how-to-run))
-  <br />`workflow_dispatch` allows also pass values like `environment`
+Section `on` explains the events the workflow is waiting for:
+
+- on `schedule` scheduled runs at defined times (based on cron rules, examples: https://crontab.guru/examples.html)
+- on `pull_request` triggered when a new pull_request is created.
+- triggered manually through workflow_dispatch (a screenshot is presented below in the
+- on demand `workflow_dispatch`, by manuall trigering ( a screenshot is presented below in the ![`How to run`](https://github.com/marcinkapturski/github-actions-workflows#3-how-to-run))
+  <br />`workflow_dispatch` also allows passing additional values, such as the environment.
 
 ```bash
 on:
@@ -45,8 +50,8 @@ on:
 
 ```
 
-Section 'jobs' contains the steps, including content of the files 'shared workflows'
-<br /> `needs` says that two other steps must be completed before this `list-specs, build-packages`
+The 'jobs' section outlines the steps involved, incorporating the content of the 'shared workflows' files.
+<br />The `needs` attribute specifies that two other steps, `list-specs` and `build-packages`, must be completed before this step.
 
 ```bash
 jobs:
@@ -70,6 +75,8 @@ jobs:
 
 Depending on the event `github.event.inputs.environment == 'localhost' ` `github.event_name == 'pull_request'`
 <br />Steps will build project packages, the app for testing and save build folder with the app itself
+
+The steps will build project packages and the app for testing and then save the build folder with the app itself based on specific event conditions, namely, when `github.event.inputs.environment` is set to 'localhost' and 'pull_request'.
 
         - name: Build packages
             run: yarn
