@@ -53,7 +53,7 @@ jobs:
           wait-on-timeout: 120
           browser: chrome
           spec: cypress/${{ matrix.spec }}
-          config-file: /${{ github.workspace }}/github-action-workflows-cypress/cypress/configs/cypress.localhost.config.js
+          config-file: /${{ github.workspace }}/cypress/configs/cypress.localhost.config.js
 
       - name: Run Tests on DEV
         if: ${{ github.event_name == 'schedule' || github.event.inputs.environment != 'localhost' && github.event_name != 'pull_request' }}
@@ -62,18 +62,18 @@ jobs:
           install: true
           browser: chrome
           spec: cypress/${{ matrix.spec }}
-          config-file: /${{ github.workspace }}/github-action-workflows-cypress/cypress/configs/cypress.dev.config.js
+          config-file: /${{ github.workspace }}/cypress/configs/cypress.dev.config.js
 
       - name: Cypress screenshots
         uses: actions/upload-artifact@v1
         if: failure()
         with:
           name: cypress-screenshots
-          path: ${{ github.workspace }}/github-action-workflows-cypress/cypress/screenshots
+          path: ${{ github.workspace }}/cypress/screenshots
 
       - name: Cypress videos
         uses: actions/upload-artifact@v1
         if: always()
         with:
           name: cypress-videos
-          path: ${{ github.workspace }}/github-action-workflows-cypress/cypress/videos
+          path: ${{ github.workspace }}/cypress/videos

@@ -27,6 +27,6 @@ jobs:
         id: list
         if: always()
         run: |
-          export JSON=$(node ${{ github.workspace }}/github-action-workflows-cypress/cypress/scripts/getAllSpecs ../e2e/)
+          export JSON=$(node ${{ github.workspace }}/cypress/scripts/getAllSpecs ../e2e/)
           echo $JSON
           echo "::set-output name=list::$JSON"

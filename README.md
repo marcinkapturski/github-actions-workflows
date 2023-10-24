@@ -1,40 +1,48 @@
-# github-actions-workflows
+# github-action-workflows-cypress
 
-<br />
-<br />
+This is example of GitHub workflow for running Cypress tests
 
-## Run Cypress automation on GitHub Actions
+## Workflow includes:
 
-<br />
-<br />
+- building all packages ( yarn install )
+- building the app locally ( yarn build)
+- running the app locally ( serve -s /build )
+- run Cypress tests in different modes (on schedule, on demand, on pull_request) as parallel run
+- report results on Slack for better visibility
 
-![cypress-web-workflow](https://user-images.githubusercontent.com/41780000/222984680-80f2d12b-b026-4d30-bf15-50104cd6cd92.png)
+# Shared workflow: cy-build-packages.yml
 
-Select 'Run WEB Automation' from the Actions tab or go to that workflow directly: <br />
-https://github.com/marcinkapturski/github-actions-workflows/actions/workflows/cy-automation-tests.yml
+# Shared workflow: cy-list-of-specs.yml
 
-This Example will present:
-- how to run Cucumber feature files in parallel by matrix
-- how to use shared workflows
-- how to work with artifacts
-- how to run tests on the localhost application
-- how to report results from the test run on Slack
+# Shared workflow: cy-run-specs.yml
 
-<br />
-<br />
+# Shared workflow: cy-slack-reporting.yml
 
-## Run simple Appium/mobile automatin on GitHub Actions
+# Main workflow: cy-automation-tests.yml
 
-<br />
-<br />
+- building all packages ( yarn install )
+- building the app locally ( yarn build)
+- running the app locally ( serve -s /build )
+- run Cypress tests as a strategy matrix for parallel run
+- run workflow in different modes (on schedule, on demand, on pull_request)
+- report results on Slack for better visibility
 
-Select 'Run Mobile Automation' from the Actions tab or go to that workflow directly: <br />
-https://github.com/marcinkapturski/github-actions-workflows/actions/workflows/mobile_automation.yml
+Workflow is decomposed into parts, call as "shared workflows"
 
-![appium-workflow](https://user-images.githubusercontent.com/41780000/222984694-9bee6a53-148c-41ac-a5fc-edbe6a77eb34.png)
+##
 
-This Example will present:
-- how to run simple Appium automation with Cucumber feature files
-- how to work with artifacts
-- how to run tests on the localhost application
-- how to report results from the test run on Slack
+## Workflow structure
+
+# Run tests on different actions
+
+## Run tests on localhost
+
+## Run tests on DEV environment
+
+## Run test on Pull Request
+
+## Run test on schedule
+
+### JavaScript getAllFiles.js, getAllSpecs.js scripts
+
+## Description for Run parallel tests (strategy -> matrix)

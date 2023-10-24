@@ -39,9 +39,9 @@ jobs:
       - name: Slack (${{ inputs.tests-result }}) notification
         if: always()
         run: |
-          export SCRIPT_PATH=${{ github.workspace }}/github-action-workflows-cypress/slack/${{ inputs.tests-result == 'success' && 'success_message.js' || 'failed_message.js'}}
+          export SCRIPT_PATH=${{ github.workspace }}/slack/${{ inputs.tests-result == 'success' && 'success_message.js' || 'failed_message.js'}}
           export EVENT_NAME=${{ github.event_name }}
           export ENVIRONMENT=${{ inputs.environment }}
           export BRANCH_NAME=${GITHUB_REF#refs/heads/}
-          export RUN_URL=${{ github.server_url }}/github-action-workflows-cypress/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          export RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           yarn node $SCRIPT_PATH "${{ secrets.SLACK_WEBHOOK }}" "$EVENT_NAME" "$BRANCH_NAME" "$RUN_URL" "$ENVIRONMENT"
