@@ -4,7 +4,7 @@
 ![github-actions-workflow](https://github.com/marcinkapturski/github-actions-workflows/assets/41780000/a843775d-d855-441f-a9f1-bad2d8806e5b)
 
 
-## POC includes:
+## 1. POC includes:
 
 - triggering workflow by different events (on schedule, on demand, on pull_request)
 - building packages and sample React app
@@ -12,7 +12,7 @@
 - running Cypress tests as a parallel run
 - report results on Slack with custom messages
 
-## Details of the individual files
+## 2. Details of the individual files
 
 ### `cy-automation-tests.yml`
 
@@ -71,7 +71,6 @@ jobs:
 Depending on the event `github.event.inputs.environment == 'localhost' ` `github.event_name == 'pull_request'`
 <br />Steps will build project packages, the app for testing and save build folder with the app itself
 
-    ```
         - name: Build packages
             run: yarn
 
@@ -84,7 +83,7 @@ Depending on the event `github.event.inputs.environment == 'localhost' ` `github
                 name: build
                 if-no-files-found: error
                 path: build
-    ```
+
 
 ### `cy-list-of-specs.yml`
 
@@ -96,7 +95,6 @@ Depending on the event `github.event.inputs.environment == 'localhost' ` `github
         "e2e/Sample1.feature",
         "e2e/Sample2.feature"
     ]
-
   ```
 
 ### `cy-run-specs.yml`
@@ -153,7 +151,7 @@ First will gader all informations about test run like: status of the run, event 
 
 <br />
 
-## How to run
+## 3. How to run
 
 ![cypress-web-workflow](https://user-images.githubusercontent.com/41780000/222984680-80f2d12b-b026-4d30-bf15-50104cd6cd92.png)
 
