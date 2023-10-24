@@ -2,7 +2,7 @@ name: Run WEB Automation
 
 on:
   # schedule:
-    # - cron: "0 8 * * *" # run on schedule, examples: https://crontab.guru/examples.html
+    #   - cron: "0 8 * * *" # run on schedule, examples: https://crontab.guru/examples.html
   pull_request:
   workflow_dispatch:
     inputs:
