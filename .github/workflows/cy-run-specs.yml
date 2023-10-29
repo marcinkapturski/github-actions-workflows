@@ -19,6 +19,7 @@ jobs:
     env:
       DEFAULT_ENV: localhost
       ENV_TYPE: ${{ inputs.environment }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

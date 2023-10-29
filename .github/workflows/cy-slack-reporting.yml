@@ -20,6 +20,7 @@ jobs:
     name: report results on Slack
     runs-on: ubuntu-latest
     if: always()
+
     steps:
       - name: Checkout the repository
         if: always()
