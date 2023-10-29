@@ -1,8 +1,8 @@
-name: Run WEB Automation
+name: Complexity level 6 -> Run Tests
 
 on:
-  # schedule:
-    #   - cron: "0 8 * * *" # run on schedule, examples: https://crontab.guru/examples.html
+  schedule:
+    - cron: "0 8 * * *" # run on schedule, examples: https://crontab.guru/examples.html
   pull_request:
   workflow_dispatch:
     inputs:
