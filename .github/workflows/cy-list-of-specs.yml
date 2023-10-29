@@ -1,0 +1,32 @@
+name: Create list of Feature files
+
+on:
+  workflow_call:
+    outputs:
+      specs:
+        description: "List of specs"
+        value: ${{ jobs.list-of-specs.outputs.specs }}
+
+jobs:
+  list-of-specs:
+    name: feature files to run
+    runs-on: ubuntu-latest
+    outputs:
+      specs: ${{ steps.list.outputs.list }}
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        if: always()
+        uses: actions/setup-node@v3
+        with:
+          node-version: ">=16.0.0"
+
+      - name: Get list of feature files
+        id: list
+        if: always()
+        run: |
+          export JSON=$(node ${{ github.workspace }}/cypress/scripts/getAllSpecs ../e2e/)
+          echo $JSON
+          echo "::set-output name=list::$JSON"

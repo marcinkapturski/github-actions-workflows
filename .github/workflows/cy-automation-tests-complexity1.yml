@@ -1,0 +1,39 @@
+name: Complexity level 1 -> Run Tests
+
+on: push
+
+jobs:
+  run-specs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Tests
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ">=16.0.0"
+
+      - name: Run Tests on already hosted app
+        uses: cypress-io/github-action@v6
+        with:
+          install: true
+          browser: chrome
+          config-file: /${{ github.workspace }}/cypress/configs/cypress.dev.config.js
+
+      - name: Cypress screenshots
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ${{ github.workspace }}/cypress/screenshots
+
+      - name: Cypress videos
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-videos
+          path: ${{ github.workspace }}/cypress/videos
