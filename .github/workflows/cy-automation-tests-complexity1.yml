@@ -25,16 +25,8 @@ jobs:
           browser: chrome
           config-file: /${{ github.workspace }}/cypress/configs/cypress.dev.config.js
 
-      - name: Cypress screenshots
-        uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: cypress-screenshots
-          path: ${{ github.workspace }}/cypress/screenshots
-
-      - name: Cypress videos
-        uses: actions/upload-artifact@v2
+      - name: Logs from the run
         if: always()
-        with:
-          name: cypress-videos
-          path: ${{ github.workspace }}/cypress/videos
+        run: |
+          export BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          export RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

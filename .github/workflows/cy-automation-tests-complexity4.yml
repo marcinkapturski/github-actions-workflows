@@ -24,8 +24,8 @@ on:
         default: "chrome"
 
 jobs:
-  build-packages:
-    name: Build packages & app
+  run-specs:
+    name: Run Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -55,23 +55,6 @@ jobs:
           name: build
           if-no-files-found: error
           path: build
-
-  run-specs:
-    name: Run Tests
-    needs: [build-packages]
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Install Node.js
-        if: ${{ inputs.environment == 'localhost' || github.event_name == 'pull_request' }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ">=16.0.0"
 
       - name: Download the build folders
         if: ${{ inputs.environment == 'localhost' || github.event_name == 'pull_request' }}

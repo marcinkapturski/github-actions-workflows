@@ -119,35 +119,3 @@ jobs:
         with:
           name: cypress-videos
           path: ${{ github.workspace }}/cypress/videos
-
-  report:
-    name: Report result
-    needs: [run-specs]
-    if: always()
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout the repository
-        if: always()
-        uses: actions/checkout@v3
-
-      - name: Install Node.js
-        if: always()
-        uses: actions/setup-node@v3
-        with:
-          node-version: ">=16.0.0"
-
-      - name: Install dependency
-        if: always()
-        run: |
-          yarn add isomorphic-fetch
-
-      - name: Slack (${{ needs.run-specs.result }}) notification
-        if: always()
-        run: |
-          export SCRIPT_PATH=${{ github.workspace }}/slack/${{ needs.run-specs.result == 'success' && 'success_message.js' || 'failed_message.js'}}
-          export EVENT_NAME=${{ github.event_name }}
-          export ENVIRONMENT=${{ inputs.environment }}
-          export BRANCH_NAME=${GITHUB_REF#refs/heads/}
-          export RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          yarn node $SCRIPT_PATH "${{ secrets.SLACK_WEBHOOK }}" "$EVENT_NAME" "$BRANCH_NAME" "$RUN_URL" "$ENVIRONMENT"
