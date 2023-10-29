@@ -1,27 +1,11 @@
 name: Complexity level 2 -> Run Tests
 
-on:
-  schedule:
-    - cron: "0 8 * * *" # run on schedule, examples: https://crontab.guru/examples.html
-  pull_request:
-  workflow_dispatch:
-    inputs:
-      browser:
-        type: choice
-        description: "Browser: chrome / firefox"
-        required: true
-        options:
-          - chrome
-          - firefox
-        default: "chrome"
+on: push
 
 jobs:
   run-specs:
     name: Run Tests
     runs-on: ubuntu-latest
-    env:
-      DEFAULT_ENV: localhost
-      ENV_TYPE: ${{ inputs.environment }}
 
     steps:
       - name: Checkout repository
@@ -34,12 +18,11 @@ jobs:
         with:
           node-version: ">=16.0.0"
 
-      - name: Run Tests on DEV
-        if: ${{ github.event_name == 'schedule' && github.event_name != 'pull_request' }}
+      - name: Run Tests on already hosted app
         uses: cypress-io/github-action@v6
         with:
           install: true
-          browser: ${{ inputs.browser }}
+          browser: chrome
           config-file: /${{ github.workspace }}/cypress/configs/cypress.dev.config.js
 
       - name: Cypress screenshots
