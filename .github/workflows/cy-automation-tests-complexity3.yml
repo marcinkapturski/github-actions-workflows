@@ -27,18 +27,34 @@ jobs:
   run-specs:
     name: Run Tests
     runs-on: ubuntu-latest
-    env:
-      DEFAULT_ENV: localhost
-      ENV_TYPE: ${{ inputs.environment }}
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
       - name: Install Node.js
+        if: ${{ inputs.environment == 'localhost' || github.event_name == 'pull_request' }}
         uses: actions/setup-node@v3
         with:
           node-version: ">=16.0.0"
+
+      - name: Build packages
+        if: ${{ inputs.environment == 'localhost' || github.event_name == 'pull_request' }}
+        run: yarn
+
+      - name: Build application
+        if: ${{ inputs.environment == 'localhost' || github.event_name == 'pull_request' }}
+        run: yarn build-localhost
+
+      - name: Save build folder
+        if: ${{ inputs.environment == 'localhost' || github.event_name == 'pull_request' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          if-no-files-found: error
+          path: build
 
       - name: Download the build folders
         if: ${{ inputs.environment == 'localhost' || github.event_name == 'pull_request' }}

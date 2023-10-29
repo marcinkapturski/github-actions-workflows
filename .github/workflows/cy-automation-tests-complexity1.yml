@@ -4,10 +4,11 @@ on: push
 
 jobs:
   run-specs:
+    name: Run Tests
     runs-on: ubuntu-latest
 
     steps:
-      - name: Run Tests
+      - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0

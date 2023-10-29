@@ -20,7 +20,8 @@ jobs:
       DEFAULT_ENV: localhost
       ENV_TYPE: ${{ inputs.environment }}
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
