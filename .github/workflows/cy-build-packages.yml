@@ -8,6 +8,7 @@ jobs:
     name: packages & app
     if: ${{ github.event.inputs.environment == 'localhost' || github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

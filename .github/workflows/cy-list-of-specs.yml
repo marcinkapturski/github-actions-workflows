@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       specs: ${{ steps.list.outputs.list }}
+
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
