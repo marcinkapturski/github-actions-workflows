@@ -1,10 +1,10 @@
-# Proof of Concept: GitHub workflow for running Cypress automation
+# GitHub workflows for running Cypress automation in various variations
 
 
 ![github-actions-workflow](https://github.com/marcinkapturski/github-actions-workflows/assets/41780000/a843775d-d855-441f-a9f1-bad2d8806e5b)
 
 
-## 1. POC includes:
+## 1. Final workflow in ver `complexity7` includes
 
 Initiating workflows through various events (on schedule, on demand, on pull_request).
 - Building packages and a sample React application.
@@ -14,7 +14,7 @@ Initiating workflows through various events (on schedule, on demand, on pull_req
 
 ## 2. Details of the individual files
 
-### `cy-automation-tests.yml`
+### `cy-automation-tests-complexity7.yml`
 
 This file is only defining on which event workflow will be run it and with which steps
 <br />Main workflow is decomposed into "shared workflows"
