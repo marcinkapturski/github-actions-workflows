@@ -19,9 +19,6 @@ jobs:
   run-specs:
     name: Run Tests
     runs-on: ubuntu-latest
-    env:
-      DEFAULT_ENV: localhost
-      ENV_TYPE: ${{ inputs.environment }}
 
     steps:
       - name: Checkout repository
@@ -55,3 +52,15 @@ jobs:
         with:
           name: cypress-videos
           path: ${{ github.workspace }}/cypress/videos
+
+      - name: Logs from the run
+        if: always()
+        run: |
+          echo "--<< BRANCH_NAME >>--"
+          export BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          echo "--<< GITHUB ACTION RUN URL >>--"
+          export RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          echo "--<< WORKFLOW TRIGGER EVENT NAME >>--"
+          echo ${{ github.event_name }}
+          echo "--<< SELECTED BROWSER >>--"
+          echo ${{ inputs.browser }}
