@@ -48,5 +48,3 @@ jobs:
           export RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           echo "--<< WORKFLOW TRIGGER EVENT NAME >>--"
           echo ${{ github.event_name }}
-          echo "--<< CYPRESS VIDEOS FILES >>--"
-          ls -lh ${{ github.workspace }}/cypress/video
