@@ -157,7 +157,9 @@ First will gather all informations about test run like: status of the run, event
 
 ## 3. How to run
 
-![cypress-web-workflow](https://user-images.githubusercontent.com/41780000/222984680-80f2d12b-b026-4d30-bf15-50104cd6cd92.png)
 
-Select 'Run WEB Automation' from the Actions tab or go to that workflow directly: <br />
-https://github.com/marcinkapturski/github-actions-workflows/actions/workflows/cy-automation-tests.yml
+### Go to that workflow directly and click on 'Run workflow button' 
+
+![cy-automation-tests-complexity7.yml]([https://user-images.githubusercontent.com/41780000/2229](https://github.com/marcinkapturski/github-actions-workflows/actions/workflows/cy-automation-tests-complexity7.yml))
+
+![cypress-web-workflow](https://user-images.githubusercontent.com/41780000/222984680-80f2d12b-b026-4d30-bf15-50104cd6cd92.png)
