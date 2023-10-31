@@ -1,4 +1,4 @@
-name: Build & Install packages
+name: Shared - Build & Install
 
 on:
   workflow_call:

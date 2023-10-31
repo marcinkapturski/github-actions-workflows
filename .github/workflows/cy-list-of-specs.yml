@@ -1,4 +1,4 @@
-name: Create list of Feature files
+name: Shared - Get list of Features
 
 on:
   workflow_call:

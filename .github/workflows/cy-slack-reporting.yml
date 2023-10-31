@@ -1,4 +1,4 @@
-name: Slack notification
+name: Shared - Slack notification
 
 on:
   workflow_call:
