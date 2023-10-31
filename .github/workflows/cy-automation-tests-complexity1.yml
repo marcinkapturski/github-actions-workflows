@@ -28,7 +28,11 @@ jobs:
       - name: Logs from the run
         if: always()
         run: |
-          export BRANCH_NAME=${GITHUB_REF#refs/heads/}
-          export RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          echo "Workflow trigger: "
+          echo "--<< BRANCH NAME >>--"
+          echo ${GITHUB_REF#refs/heads/}
+          echo "--<< TEST RUN URL >>--"
+          export ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          echo "--<< WORKFLOW TRIGGER EVENT >>--"
           echo ${{ github.event_name }}
+          echo "--<< ALL FILES UNDER WORKSPACE >>--"
+          ls -lh ${{ github.workspace }}

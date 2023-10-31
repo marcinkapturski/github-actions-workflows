@@ -125,23 +125,3 @@ jobs:
         with:
           name: cypress-videos
           path: ${{ github.workspace }}/cypress/videos
-
-      - name: Logs from the run
-        if: always()
-        run: |
-          echo "--<< BRANCH_NAME >>--"
-          export BRANCH_NAME=${GITHUB_REF#refs/heads/}
-          echo "--<< GITHUB ACTION RUN URL >>--"
-          export RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          echo "--<< WORKFLOW TRIGGER EVENT NAME >>--"
-          echo ${{ github.event_name }}
-          echo "--<< SELECTED ENVIRONMENT >>--"        
-          echo ${{ inputs.environment }}
-          echo "--<< SELECTED BROWSER >>--"
-          echo ${{ inputs.browser }}
-          echo "--<< CYPRESS CONFIG LOCALHOST >>--"
-          cat ${{ github.workspace }}/cypress/configs/cypress.localhost.config.js          
-          echo "--<< CYPRESS CONFIG DEV >>--"
-          cat ${{ github.workspace }}/cypress/configs/cypress.dev.config.js
-          echo "--<< LOCAL APP FRROM BUILD STEP >>--"
-          ls -lh ${{ github.workspace }}/build
