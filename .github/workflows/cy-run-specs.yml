@@ -1,4 +1,4 @@
-name: Run specs
+name: Shared - Run specs
 
 on:
   workflow_call:
