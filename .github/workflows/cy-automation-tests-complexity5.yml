@@ -56,12 +56,6 @@ jobs:
           if-no-files-found: error
           path: build
 
-      - name: Logs from build folder
-        if: always()
-        run: |
-          echo "--<< LOCAL APP FRROM BUILD STEP >>--"
-          ls -lh ${{ github.workspace }}/build
-
   run-specs:
     name: Run Tests
     needs: [build-packages]
