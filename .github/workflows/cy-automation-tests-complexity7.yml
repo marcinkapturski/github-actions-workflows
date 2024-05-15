@@ -10,9 +10,10 @@ on:
         type: choice
         description: "Environment: staging / dev"
         required: true
-        options:
-          - staging
-          - dev
+        options:                  
+          - dev -> flowmap-dev.fly.dev
+          - staging -> flowmap-staging.fly.dev
+          - prod -> app.flowmap.com
         default: "staging"
       test_type:
         type: choice
@@ -27,7 +28,7 @@ on:
           - create new flow
           - actions
           - roles
-          - chatgpt tests
+          - chatgpt
         default: "e2e"
 
 jobs:
