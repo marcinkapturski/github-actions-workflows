@@ -1,19 +1,34 @@
 name: Complexity level 7 -> Run Tests
 
 on:
-  schedule:
-    - cron: "0 8 * * *" # run on schedule, examples: https://crontab.guru/examples.html
+  # schedule:
+    # - cron: "0 8 * * *" # run on schedule, examples: https://crontab.guru/examples.html
   pull_request:
   workflow_dispatch:
     inputs:
       environment:
         type: choice
-        description: "Environment: localhost / dev"
+        description: "Environment: staging / dev"
         required: true
         options:
-          - localhost
+          - staging
           - dev
-        default: "localhost"
+        default: "staging"
+      test_type:
+        type: choice
+        description: "Select type of tests to run"
+        required: true
+        options:
+          - e2e
+          - smoke
+          - regression
+          - editor
+          - login
+          - create new flow
+          - actions
+          - roles
+          - chatgpt tests
+        default: "e2e"
 
 jobs:
   list-specs:
